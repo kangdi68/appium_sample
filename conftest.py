@@ -26,6 +26,10 @@ def start_app_with_driver_init(request):
         pytest.fail('appium Driver is None!')
     request.cls.driver = appium_driver
 
+@pytest.fixture(scope='function', autouse=True)
+def get_current_test_name(request):
+    return str(request.node.name)
+    
 @pytest.fixture(scope='session')
 def appium_env(request):
     """
