@@ -1,5 +1,5 @@
 import pytest
-from utils.driver_factory import DriverFactory
+from driver_factory import DriverFactory
 
 @pytest.fixture(scope='class')
 def init_driver(request, appium_env, platform, app, app_id_cloud, desired_os_version):
