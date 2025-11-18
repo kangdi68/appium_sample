@@ -24,7 +24,7 @@ ios_common_desired_capabilities = {
 
 class DriverFactory:
 
-    def create_driver(self, appium_env, platform, app, test_class, desired_os_version):
+    def create_driver(self, appium_env, platform, app):
         """
         :param app: path to the test app (default is apps folder)
         :param appium_env: local or sauce or something else
@@ -38,7 +38,7 @@ class DriverFactory:
                 "appium:udid": "udid",
                 "appium:deviceName": "model name"
             }
-        dc = self.set_desired_capabilities(appium_env, platform, preset_device, app, test_class)
+        dc = self.set_desired_capabilities(appium_env, platform, preset_device, app)
         retry_config = Retry(total=3,
                              backoff_factor=1,
                              status_forcelist=[500, 502, 503, 504])
@@ -51,7 +51,7 @@ class DriverFactory:
         except WebDriverException as error:
             print("WebDriverException=", error)
 
-    def set_desired_capabilities(self, appium_env, platform, preset_device, app=None, test_class=None):
+    def set_desired_capabilities(self, appium_env, platform, preset_device, app=None):
         _desired_caps = dict()
         if platform.lower() == constants.PLATFORM_IOS:
             _desired_caps.update(ios_common_desired_capabilities)
